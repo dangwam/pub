@@ -75,6 +75,22 @@ col = st.columns((1.5, 4.5, 2), gap='medium')
 with col[0]:
     st.markdown("#### ToDay's Price Action")
     summary_detail = yquery_summary_detail(ticker)
-    st.metric(label='test', value=4, delta=2)
+
+    #st.metric(label='test', value=4, delta=2)
+    st.dataframe(df_selected_year_sorted,
+                 column_order=("states", "population"),
+                 hide_index=True,
+                 width=None,
+                 column_config={
+                    "states": st.column_config.TextColumn(
+                        "States",
+                    ),
+                    "population": st.column_config.ProgressColumn(
+                        "Population",
+                        format="%f",
+                        min_value=0,
+                        max_value=max(df_selected_year_sorted.population),
+                     )}
+                 )
     
 
