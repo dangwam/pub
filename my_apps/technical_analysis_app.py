@@ -15,9 +15,12 @@ def get_sp500_components():
     df = pd.read_html("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
     df = df[0]
     tickers = df["Symbol"].to_list()
-    tickers_companies_dict = dict(
-        zip(df["Symbol"], df["Security"])
-    )
+    extended_symbols = ['RIVN', 'AVGO', 'SPY', 'QQQ', 'TSLA', 'MA']
+    extended_companies = ['Rivian Automotive', 'Broadcom Inc', 'SPDR S&P 500 ETF', 'Invesco QQQ Trust', 'Tesla', 'Mastercard']
+    # Combine tickers with extended symbols
+    tickers.extend(extended_symbols)
+    ##tickers_companies_dict = dict(zip(df["Symbol"], df["Security"]))
+    tickers_companies_dict = dict(zip(df["Symbol"], df["Security"]), **dict(zip(extended_symbols, extended_companies)))
     return tickers, tickers_companies_dict
 
 @st.cache_data
@@ -144,4 +147,5 @@ if rsi_flag:
                showbands=True)
 
 fig = qf.iplot(asFigure=True)
-st.plotly_chart(fig)
+layout = dict(width='100%', height='100%')
+st.plotly_chart(fig, layout=layout)
