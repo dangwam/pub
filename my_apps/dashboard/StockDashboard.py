@@ -2,19 +2,21 @@ import streamlit as st
 import altair as alt  # Import altair for themes
 import pandas as pd
 import yfinance as yf
-from financetoolkit import Toolkit
-from yahooquery import Ticker
-from yahooquery import Screener
 import pytz
 import os, warnings
 import plotly.express as px
 import datetime
-warnings.filterwarnings('ignore')
-
+import matplotlib.pyplot as plt
+import seaborn as sns 
+import plotly.graph_objects as go
+from financetoolkit import Toolkit
+from yahooquery import Ticker
+from yahooquery import Screener
+from talib import RSI, BBANDS, MACD, HT_TRENDLINE, SAR, SMA
 s = Screener()
 
 #############################################
-#####API_KEY = "DZvlZlf0Q0sDAwwwh59Z90CVB05FjQlS"
+#####API_KEY = 
 #############################################
 # Streamlit App Configuration (Best Practice)
 hide = """
@@ -347,10 +349,7 @@ with col[0]:
     #st.dataframe(ratio_df)
 
 with col[1]:
-    import matplotlib.pyplot as plt
-    import seaborn as sns 
-    import plotly.graph_objects as go
-    from talib import RSI, BBANDS, MACD, HT_TRENDLINE, SAR, SMA
+    
     ticker = selected_ticker
     period = "1d"
     interval = "15m"
